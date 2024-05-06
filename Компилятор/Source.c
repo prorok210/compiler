@@ -74,22 +74,27 @@ int main() {
         }
         else if (second_part_command == NULL) {
             // запись данных
-            if (strlen(first_part_command) == 4) {
-                int data_flag = 0;
-                for (int i = 0; i < strlen(first_part_command); i++) {
-                    char ch = (first_part_command[i]);
-                    if (!(isdigit(ch) || (ch >= 'a' && ch <= 'f'))) {
-                        data_flag = 1;
-                    }
+            int data_flag = 0;
+            for (int i = 0; i < strlen(first_part_command); i++) {
+                char ch = (first_part_command[i]);
+                if (!(isdigit(ch) || (ch >= 'a' && ch <= 'f'))) {
+                    data_flag = 1;
                 }
-                if (data_flag == 0) {
+            }
+            if (data_flag == 0) {
+                if (strlen(first_part_command) == 4){
                     fprintf(file, "%s\n", first_part_command);
                 }
                 else {
-                    printf("Недопустимые символы при вводе данных данных\n");
+                    printf("недопустимая длинна данных\n");
+                }  
                 }
+            else {
+                printf("Недопустимые символы при вводе данных данных\n");
             }
         }
+
+
         else if (second_part_command != NULL){
             // проверки адреса 
             if (strlen(second_part_command) != 2) {
@@ -197,8 +202,6 @@ int main() {
             else if ((strcmp(first_part_command, "ret") == 0) || (strcmp(first_part_command, "RET") == 0)) {
                 fprintf(file, "1e%s\n", second_part_command);
             }
-
-            
         }
 
         else {
